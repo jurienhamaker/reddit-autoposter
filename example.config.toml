@@ -1,0 +1,13 @@
+version = 1.1
+
+discord_webhook_url = ""
+
+# Findaserver
+[posts.findaserver-mon]
+	cron = "0 18 * * MON" # Every monday at 6pm
+	reddit = "/r/findaserver"
+	type = "link"
+	title = "Join my server!"
+	link = "https://discord.gg/"
+	flair_id = "2ed2fbdc-2a68-11ec-afd9-fe1ea62d2e59" # 21+ community flair id
+

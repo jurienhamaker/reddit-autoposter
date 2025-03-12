@@ -10,13 +10,13 @@ import (
 )
 
 type PostConfig struct {
-	Cron     string
-	Reddit   string
-	Type     string
-	Title    string
-	Link     string
-	Content  string
-	Flair_ID string
+	Cron    string
+	Reddit  string
+	Type    string
+	Title   string
+	Link    string
+	Content string
+	FlairID string `toml:"flair_id"`
 }
 
 var ctx = context.Background()
@@ -25,18 +25,10 @@ func getClient() (client *reddit.Client, err error) {
 	return reddit.NewClient(reddit.Credentials{}, reddit.FromEnv)
 }
 
-func CreateCRONFunc(name string, post PostConfig) func() {
-	return func() {
-		err := Post(name, post)
-		if err != nil {
-			slog.Error("Something wen't wrong posting", "err", err)
-		}
-	}
-}
-
-func Post(name string, post PostConfig) (err error) {
+func Post(name string, post PostConfig) (posted *reddit.Submitted, err error) {
 	if post.Type != "text" && post.Type != "link" {
-		return errors.New("invalid post type")
+		err = errors.New("invalid post type")
+		return
 	}
 
 	client, err := getClient()
@@ -44,14 +36,12 @@ func Post(name string, post PostConfig) (err error) {
 		return
 	}
 
-	var posted *reddit.Submitted
-
 	if post.Type == "text" {
 		posted, _, err = client.Post.SubmitText(ctx, reddit.SubmitTextRequest{
 			Subreddit: post.Reddit,
 			Title:     post.Title,
 			Text:      post.Content,
-			FlairID:   post.Flair_ID,
+			FlairID:   post.FlairID,
 		})
 	}
 
@@ -60,7 +50,7 @@ func Post(name string, post PostConfig) (err error) {
 			Subreddit: post.Reddit,
 			Title:     post.Title,
 			URL:       post.Link,
-			FlairID:   post.Flair_ID,
+			FlairID:   post.FlairID,
 		})
 	}
 
@@ -68,7 +58,17 @@ func Post(name string, post PostConfig) (err error) {
 		return
 	}
 
-	slog.Info(fmt.Sprintf("Posted %s", name), "URL", posted.URL, "FlairID", post.Flair_ID)
+	slog.Info(fmt.Sprintf("Posted %s", name), "URL", posted.URL, "FlairID", post.FlairID)
 
+	return
+}
+
+func GetPost(id string) (post *reddit.PostAndComments, err error) {
+	client, err := getClient()
+	if err != nil {
+		return
+	}
+
+	post, _, err = client.Post.Get(ctx, id)
 	return
 }
