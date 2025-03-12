@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/jurienhamaker/reddit-autoposter/compare/v1.0.0...v1.1.0) (2025-03-12)
+
+
+### Features
+
+* add discord webhook ([17c948b](https://github.com/jurienhamaker/reddit-autoposter/commit/17c948b81ffd830f623385e126793ce6109ceb07))
+
 ## 1.0.0 (2025-03-11)
 
 
