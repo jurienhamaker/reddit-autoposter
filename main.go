@@ -98,7 +98,7 @@ func createCRONFunc(name string, post reddit.PostConfig) func() {
 				fullPost, _ = reddit.GetPost(posted.ID)
 			}
 
-			err = discord.Post(config.DiscordWebhookUrl, name, post, fullPost)
+			err = discord.Post(config.DiscordWebhookUrl, name, post, fullPost, err)
 			if err != nil {
 				slog.Error("Something wen't wrong sending webhook", "err", err)
 			}

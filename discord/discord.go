@@ -11,7 +11,7 @@ import (
 	localReddit "jurien.dev/reddit-recurring/reddit"
 )
 
-func Post(webhookUrl string, postName string, post localReddit.PostConfig, fullPost *reddit.PostAndComments) (err error) {
+func Post(webhookUrl string, postName string, post localReddit.PostConfig, fullPost *reddit.PostAndComments, postErr error) (err error) {
 	var embed discordwebhook.Embed
 	subReddit := fmt.Sprintf("/r/%s", strings.TrimLeft(post.Reddit, "/r/"))
 	timestamp := time.Now().Format("2017-09-07 17:06:06")
@@ -33,6 +33,16 @@ func Post(webhookUrl string, postName string, post localReddit.PostConfig, fullP
 	if fullPost == nil {
 		title := fmt.Sprintf("Failed to post %s to %s", postName, subReddit)
 		color := "12320768"
+
+		errorTitle := "Error message"
+		errorMessage := postErr.Error()
+		splitted := strings.Split(errorMessage, ":")
+		last := splitted[len(splitted)-1]
+
+		fields = append(fields, discordwebhook.Field{
+			Name:  &errorTitle,
+			Value: &last,
+		})
 
 		embed = discordwebhook.Embed{
 			Title:  &title,
