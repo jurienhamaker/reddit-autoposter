@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/jurienhamaker/reddit-autoposter/compare/v1.1.0...v1.2.0) (2025-03-13)
+
+
+### Features
+
+* **discord:** Add the error message to the embed ([db1c9e1](https://github.com/jurienhamaker/reddit-autoposter/commit/db1c9e1009dfcaf60c34f8774aea96fb32fb88de))
+
+
+### Bug Fixes
+
+* use TrimLeft instead of Trim ([7d309eb](https://github.com/jurienhamaker/reddit-autoposter/commit/7d309ebdbe65fef4efa68154b8b725ca3a858103))
+
 ## [1.1.0](https://github.com/jurienhamaker/reddit-autoposter/compare/v1.0.0...v1.1.0) (2025-03-12)
 
 
