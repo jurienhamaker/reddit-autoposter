@@ -13,7 +13,7 @@ import (
 
 func Post(webhookUrl string, postName string, post localReddit.PostConfig, fullPost *reddit.PostAndComments) (err error) {
 	var embed discordwebhook.Embed
-	subReddit := fmt.Sprintf("/r/%s", strings.Trim(post.Reddit, "/r/"))
+	subReddit := fmt.Sprintf("/r/%s", strings.TrimLeft(post.Reddit, "/r/"))
 	timestamp := time.Now().Format("2017-09-07 17:06:06")
 
 	subRedditTitle := "Subreddit"

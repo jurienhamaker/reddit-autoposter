@@ -71,7 +71,7 @@ func main() {
 func run() (err error) {
 	c := cron.New()
 	for name, post := range config.Posts {
-		subReddit := strings.Trim(post.Reddit, "/r/")
+		subReddit := strings.TrimLeft(post.Reddit, "/r/")
 		slog.Info(fmt.Sprintf("Setting cron for post %s", name), "cron", post.Cron, "reddit", subReddit)
 
 		_, err = c.AddFunc(post.Cron, createCRONFunc(name, post))
