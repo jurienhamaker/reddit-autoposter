@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/jurienhamaker/reddit-autoposter/compare/v1.2.0...v1.3.0) (2026-07-12)
+
+
+### Features
+
+* Add config file path env variable ([528e47d](https://github.com/jurienhamaker/reddit-autoposter/commit/528e47d8973ed5c87c12da460b50eb2d2831fd7b))
+
 ## [1.2.0](https://github.com/jurienhamaker/reddit-autoposter/compare/v1.1.0...v1.2.0) (2025-03-13)
 
 
