@@ -41,6 +41,10 @@ func main() {
 	}
 
 	configFile := "config.toml"
+	if len(os.Getenv("CONFIG_FILE_PATH")) != 0 {
+		configFile = os.Getenv("CONFIG_FILE_PATH")
+	}
+
 	if _, err := os.Stat(configFile); err != nil {
 		slog.Error("Couldn't find config.toml", "err", err)
 		panic(err)
